@@ -47,13 +47,13 @@ def fourier(amps,dt,nt): #pass specific section of soudwave, give amplitude sect
 
 	max_freqs = []
 	for i,c in enumerate(freq_arr): #go through the list of amplitudes and find the max amplitude and its corresponding frequency
-		if(c>.35):
+		if(c>.5):
 			max_freqs.append(note_freqs[i])
 
 	#uncomment to view fourier graph
-	plt.bar(note_freqs, freq_arr, align='center', alpha=0.5, hold=True) #discrete plot
-	plt.xlim(0,4200) #limit to only the frequencies we care about
-	plt.show()
+	# plt.bar(note_freqs, freq_arr, align='center', alpha=0.5, hold=True) #discrete plot
+	# plt.xlim(0,4200) #limit to only the frequencies we care about
+	# plt.show()
 
 	final_arr = []
 	for freq in max_freqs:final_arr.append((freq,keys[freq])) #find the notes associated with frequencies and enter into a final list, keys[freq]
@@ -117,21 +117,21 @@ lower = 0 #lower bound of slice
 upper = 7000 #upper bound of slice
 
 #use just below to look at indivual spike results on fourier graph, uncomment bar graph in fourier function
-index = 1
-try:
-	results.append(fourier(height[clean_spikes[index]-lower:clean_spikes[index]+lower],dt,lower+upper))
-except:
-	try:
-		results.append(fourier(height[0:clean_spikes[index]+upper],dt,clean_spikes[index]+upper))
-	except:
-		results.append(fourier(height[clean_spikes[index]-lower:nt],dt,nt+lower-clean_spikes[index]))
-
-# for spike in clean_spikes: #send portions of original file to fourier function and store return into results list
+# index = 1
+# try:
+# 	results.append(fourier(height[clean_spikes[index]-lower:clean_spikes[index]+lower],dt,lower+upper))
+# except:
 # 	try:
-# 		results.append(fourier(height[spike-lower:spike+upper],dt,lower+upper))
+# 		results.append(fourier(height[0:clean_spikes[index]+upper],dt,clean_spikes[index]+upper))
 # 	except:
-# 		try:
-# 			results.append(fourier(height[0:spike+uppper],dt,spike+upper))
-# 		except:
-# 			results.append(fourier(height[spike-lower:nt],dt,nt+lower-spike))
-print(results, clean_spikes[1]) #display result as list of lists
+# 		results.append(fourier(height[clean_spikes[index]-lower:nt],dt,nt+lower-clean_spikes[index]))
+
+for spike in clean_spikes: #send portions of original file to fourier function and store return into results list
+	try:
+		results.append(fourier(height[spike-lower:spike+upper],dt,lower+upper))
+	except:
+		try:
+			results.append(fourier(height[0:spike+uppper],dt,spike+upper))
+		except:
+			results.append(fourier(height[spike-lower:nt],dt,nt+lower-spike))
+print(results) #display result as list of lists
