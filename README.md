@@ -1,2 +1,2 @@
 # Music2Play
-A program written in Python that reads a WAV audio file with music and outputs a collection of musical notes with timing based on envelope amplitude spikes. Implements Fast Fourier Transforms (FFT) to determine most prominent frequencies in a given audio slice.
+A program written in Python that reads a WAV audio file with music and outputs a collection of musical notes with timing based on envelope amplitude spikes. Implements Fast Fourier Transforms (FFT) to determine most prominent frequencies in a given audio slice. Currently, works with Mary Had a Little Lamb; the code is currently being optomized to work with different types of songs and instruments. Includes support for chords.
